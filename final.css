@@ -1,0 +1,151 @@
+/* 
+Main color 1 # f97831
+Main color 2 # 00A6FF
+Font color 1 # black
+Font color 2 # white
+Background 1 # white (#FFFAFA
+)Fontsize h1 = 1.5rem
+Fontsize h2 = 1.25rem
+Fontsize p = 1rem
+ */
+
+/* --- Variables --- */
+
+:root {
+  --bg-color: #fffafa;
+  --heading-color: #00a6ff;
+  --theme-color: #f97831;
+  --button-color: lightgrey;
+  --button-color_hover: rgb(156, 154, 154);
+  --text-color: #000000;
+  --text-color2: white;
+  --font-size-big: 2rem;
+  --font-size-small: 1.25rem;
+}
+
+/* --- General CSS --- */
+body {
+  margin: 0 auto;
+}
+
+h1 {
+  font-family: "Lato";
+  color: var(--heading-color);
+  font-size: var(--font-size-big);
+}
+p,a {
+  font-family: "Lato";
+  color: var(--heading-color);
+  font-size: var(--font-size-small);
+}
+button {
+  min-width: 15rem;
+  color: var(--theme-color);
+  background-color: var(--button-color);
+  padding: 1em 1.5em;
+  padding: 10px;
+  border-radius: 1rem;
+  font-size: var(--font-size-small);
+  margin: 10px 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+button:hover {
+  background-color: var(--button-color_hover);
+}
+.container {
+  position: relative;
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 2px solid blueviolet;
+}
+.position1 {
+  margin: 0;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.position2 {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.next,.letsgo {
+  margin: 0;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.letsgo {
+  top: 70%;  
+}
+.pic-alicebob img {
+  width: 30rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  /* border: 3px solid rgb(226, 223, 43); */
+}
+.readstory {
+  margin: 0;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.press {
+  margin: 0;
+  position: absolute;
+  top: 83%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.text-alicebob p {
+  color: var(--text-color);
+  width: 30rem;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  /* border: 3px solid rgb(226, 223, 43); */
+}
+.thatway{
+  width: 30rem;
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.hello-user {
+  margin: 0;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.new_pw {
+  margin: 0;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
