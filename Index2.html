@@ -1,0 +1,202 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password page</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https:kit.fontawesome.com/3da1a747b2.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="position1">
+        <h1>Don't be like Alice!</h1>
+      </div>
+      <div class="postion2">
+        <!-- Alice_Bob pic  -->
+       <div class="pic-alicebob">
+          <img src="assets/Alice_Bob.jpg" alt="Picture of Alice and Bob on password safety" />
+       </div>
+        <div class="readstory">
+         <p>To read the story of alice and bob</p>
+        </div>
+        <!-- Link to read a text -->
+        <div class="press">
+          <a href="#story"><b>Press here</b></a>
+        </div>
+      </div>
+      
+      <!-- Button continue -->
+      <div class="next">
+        <button onclick="window.location.href='#generator';">Continue</button>
+      </div>
+    </div>
+    <div class="container" id="story">
+      <div class="position1">
+        <h1>Don't be like Alice!</h1>
+      </div>
+    <!-- Alice_Bob text  -->
+    <div class="text-alicebob">
+      <p>
+        Bob and Alice are two close friends, who went to the university together. After
+        completing her studies Alice found a very good job and made a career. But 
+        unfortunately Bob did not find a job. After a while Bob noticed that Alice 
+        spends less and less time with him and that her behavoir towards him has 
+        become bad. So Bob thought about, how he could raise some barriers for Alice 
+        and so he came up with the idea of hacking her work computer. He started many 
+        attemps to find out Alice's password, for example "Alice 1997" , "Bayerstraße 2" ,
+          "ABCD" , "123456789"… After a long time he figured out the correct password and 
+          Alice lost her job!
+      </p>
+    </div>
+    <div class="thatway">
+      <p>...that's why we are here for you to offer you a password with extensive security.</p>
+    </div>
+    
+    <!-- Button next -->
+    <div class="next">
+      <button onclick="window.location.href='#generator';">Next</button>
+    </div>
+  </div>
+  <div class="container" id="generator">
+    <!-- here text -->
+    <div class="position1">
+      <h1>Give your self the gift of safety!</h1>
+    </div>
+    <!-- Alice_Bob text  -->
+    <div class="hello-user">
+      <p>
+        Hello dear user, Welcome to your password world!
+      </p>
+    </div>
+
+    <div class="settings">
+      <div class="setting">
+        <label>Password length&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="number" id="length" min='8' max='20' value='20' />
+      </div>
+      <div class="setting">
+        <label>Include uppercase letters</label> 
+        <input type="checkbox" id="uppercase" checked />
+      </div>
+      <div class="setting">
+        <label>Include lowercase letters</label> 
+        <input type="checkbox" id="lowercase" checked />
+      </div>
+      <div class="setting">
+        <label>Include numbers</label> 
+        <input type="checkbox" id="numbers" checked />
+      </div>
+      <div class="setting">
+        <label>Include symbols</label> 
+        <input type="checkbox" id="symbols" checked />
+      </div>
+    </div>
+
+    <div class="new_pw">
+      <p>Your new Password :</p>
+    </div>
+    <div class="result-container">
+        <span id="result"></span>
+        <span class="btn" id="clipboard"><i class="far fa-clipboard"></i></span>
+    </div>
+    <!-- Button next -->
+    <div class="next" id="generate">
+      <button>Generate</button>
+    </div>
+    
+    <!-- JS Script here -->
+    <script>
+      const resultEl = document.getElementById('result');
+      const lengthEl = document.getElementById('length');
+      const uppercaseEl = document.getElementById('uppercase');
+      const lowercaseEl = document.getElementById('lowercase');
+      const numbersEl = document.getElementById('numbers');
+      const symbolsEl = document.getElementById('symbols');
+      const generateEl = document.getElementById('generate');
+      const clipboard = document.getElementById('clipboard');
+
+      const randomFunc = {
+        lower: getRandomLower,
+        upper: getRandomUpper,
+        number: getRandomNumber,
+        symbol: getRandomSymbol
+      }
+      // if clicked on button id=clipboard
+      clipboard.addEventListener('click', () => {
+        const textarea = document.createElement('textarea');
+        const password = resultEl.innerText;
+        
+        if(!password) { return; }
+        
+        textarea.value = password;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        textarea.remove();
+        alert('Password copied to clipboard');
+      });
+      // if clicked on button id=generate
+      generate.addEventListener('click', () => {
+        const length = +lengthEl.value;
+        const hasLower = lowercaseEl.checked;
+        const hasUpper = uppercaseEl.checked;
+        const hasNumber = numbersEl.checked;
+        const hasSymbol = symbolsEl.checked;
+        
+        resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
+      });
+
+      function generatePassword(lower, upper, number, symbol, length) {
+        let generatedPassword = '';
+        const typesCount = lower + upper + number + symbol;
+        const typesArr = [{lower}, {upper}, {number}, {symbol}].filter(item => Object.values(item)[0]);
+        
+        // Doesn't have a selected type
+        if(typesCount === 0) {
+          return '';
+        }
+        
+        // create a loop
+        for(let i=0; i<length; i+=typesCount) {
+          typesArr.forEach(type => {
+            const funcName = Object.keys(type)[0];
+            generatedPassword += randomFunc[funcName]();
+          });
+        }
+        
+        const finalPassword = generatedPassword.slice(0, length);
+        
+        return finalPassword;
+      }
+
+      function getRandomLower() {
+        return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+      }
+
+      function getRandomUpper() {
+        return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+      }
+
+      function getRandomNumber() {
+        return +String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+      }
+
+      function getRandomSymbol() {
+        const symbols = '!@#$%^&*(){}[]=<>/,.'
+        return symbols[Math.floor(Math.random() * symbols.length)];
+      }
+
+
+
+    </script>
+
+  </div>
+  
+  </body>
+  
+</html>
